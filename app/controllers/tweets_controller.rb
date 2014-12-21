@@ -2,7 +2,7 @@ class TweetsController < ApplicationController
   
 
   def index
-    @posts = Tweet.all
+    @posts = Tweet.order(created_at: :desc)
     @tweet_count = @posts.where(:user_id=>current_user.id).count
   end
 
