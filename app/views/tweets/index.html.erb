@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="col-md-4">
+     <div class="card">
+        <div class="card-image">
+          <img class="img-responsive" src="../batman.jpg">
+          <span class="card-title"><%= current_user.email%>
+            <span>
+              <%= link_to('Logout?', destroy_user_session_path, :method => :delete, class: "btn btn-danger btn-xs") %>
+            </span>
+          </span>
+        </div>
+        <div class="card-content">
+          <p><i class="fa fa-pencil-square-o"></i> Tweets: <span class="label label-success"><%= @tweet_count%></span></p>
+        </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card card-inside">
+      <%= bootstrap_form_for :tweets, url: tweets_path do |f| %>
+      <p>
+        <%= f.text_area :text %>
+      </p>
+      <p>
+        <%= f.submit "Tweet", class: "btn btn-sm btn-info" %>
+      </p>
+    <% end %>
+    </div>
+
+    <% @posts.each do |tweet|%>
+      <div class="card card-inside">
+        <img src="../user.jpg" class="img img-circle" style="height:40px;" /> <b><%= User.find(tweet.user_id).email%></b>
+        <p><%= tweet.text%></p>
+      </div>
+    <% end %>
+
+  </div>
+</div>

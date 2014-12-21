@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="col-md-4">
+     <div class="card">
+        <div class="card-image">
+          <img class="img-responsive" src="../batman.jpg">
+          <span class="card-title"><%= current_user.email%>
+            <span>
+              <%= link_to('Logout?', destroy_user_session_path, :method => :delete, class: "btn btn-danger btn-xs") %>
+            </span>
+          </span>
+        </div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="card card-inside">
+      <%= bootstrap_form_for :tweets, url: tweets_path do |f| %> 
+      <p>
+        <%= f.text_area :text %>
+      </p>
+      <p>
+        <%= f.submit "Tweet", class: "btn btn-sm btn-info" %>
+      </p>
+    <% end %>
+    </div>
+
+    <div class="card card-inside">
+      <% if @tweet.errors.any? %>
+        <div id="error_explanation">
+          <ul>
+            <% @tweet.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
