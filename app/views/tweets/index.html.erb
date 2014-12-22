@@ -28,7 +28,7 @@
 
     <% @posts.each do |tweet|%>
       <div class="card card-inside">
-        <img src="../user.jpg" class="img img-circle" style="height:40px;" /> <b><%= tweet.user.email%></b>
+        <img src="../user.jpg" class="img img-circle" style="height:40px;" /> <b><%= tweet.user.email%></b> <span class="pull-right"><%= time_ago_in_words(tweet.created_at)%></span>
         <p><%= tweet.text%></p>
       </div>
     <% end %>
