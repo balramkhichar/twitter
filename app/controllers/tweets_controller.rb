@@ -3,11 +3,11 @@ class TweetsController < ApplicationController
 
   def index
     @posts = Tweet.order(created_at: :desc)
-    @tweet_count = @posts.where(:user_id=>current_user.id).count
+    @tweet_count = current_user.tweets.count
   end
 
   def create
-    @tweet = User.find(current_user).tweets.new(tweet_permit)
+    @tweet = User.find(current_user).tweets.new(create_tweet_params)
     if @tweet.save
       redirect_to tweets_path
     else
@@ -19,7 +19,7 @@ class TweetsController < ApplicationController
     @tweet = User.find(current_user).tweets.new
   end
 
-  def tweet_permit 
+  def create_tweet_params 
     params.require(:tweets).permit(:text)
   end
 
