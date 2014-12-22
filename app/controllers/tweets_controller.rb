@@ -7,9 +7,7 @@ class TweetsController < ApplicationController
   end
 
   def create
-    allow_data = tweet_permit
-    allow_data["user_id"]= current_user.id
-    @tweet = Tweet.new(allow_data)
+    @tweet = User.find(current_user).tweets.new(tweet_permit)
     if @tweet.save
       redirect_to tweets_path
     else
@@ -18,7 +16,7 @@ class TweetsController < ApplicationController
   end
 
   def new
-    @tweet = Tweet.new
+    @tweet = User.find(current_user).tweets.new
   end
 
   def tweet_permit 
